@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 1, Time elapsed: 0.613 s <<< FAILURE! - in TestSuite
+BasePackage.BaseTest.endTest  Time elapsed: 0.468 s  <<< FAILURE!
+java.lang.NullPointerException
+	at BasePackage.BaseTest.endTest(BaseTest.java:217)
+

@@ -1,0 +1,23 @@
+
+Copyright © 2021 Xunison Ltd All Rights Reserved.
+ =============================================
+
+[14:25:44]: [Driver on Realme] setup is completed!
+[14:25:44]: [APP] stcDebug is running...
+[14:25:44]: Register button is displayed
+[14:25:44]: Login button is displayed
+[14:25:44]: Login page displayed
+[14:25:44]: Login button is clicked
+[14:25:46]: Email address field displayed
+[14:25:46]: Password filed displayed
+[14:25:46]: Login button is displayed
+[14:25:46]: Show password button is displayed
+[14:25:46]: Forgot password link is displayed
+[14:25:47]: Don't have account link is displayed
+[14:25:47]: Create account field is displayed
+[14:25:47]: Email does not entered
+[14:25:49]: Password does not entered
+[14:25:49]: Login button is clicked
+[14:25:50]: Error displayed
+[14:25:50]: NATIVE_APP
+[14:25:50]: [APP] stcDebug has been stopped
