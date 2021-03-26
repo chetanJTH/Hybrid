@@ -8,14 +8,12 @@ import utils.Devices;
 import utils.Log;
 import utils.Utils;
 
-import java.net.MalformedURLException;
-
 public class TestManager {
 
-    public static TestManager testAndroid(Devices device, Apps app) throws MalformedURLException {
+    public static TestManager testAndroid(Devices device, Apps app) {
         return new TestManager(device, app);
     }
-    public TestManager(Devices device, Apps app) throws MalformedURLException {
+    public TestManager(Devices device, Apps app) {
         this.device = device;
         this.app = app;
         initAndroid();
@@ -29,7 +27,7 @@ public class TestManager {
     public AndroidDriver getDriverAndroid() {
         return androidDriver;
     }
-    public void initAndroid() throws MalformedURLException {
+    public void initAndroid() {
 
         if (!isLaughed && device == Devices.Emulator) {
             Utils.launchEmulator();

@@ -21,13 +21,14 @@ public class AppiumServer {
 
      //       String Appium_Node_Path="C:/Users/HP/AppData/Roaming/npm/appium.cmd";
           // String appiumJSPath = "C:Users/HP/AppData/Roaming/npm/node_modules/appium/build/lib/main.js";
-           String appiumJSPath = "/usr/local/lib/node_modules/appium/build/lib/main.js";
+           String appiumJSPath = "/Users/HP/AppData/Roaming/npm/node_modules/appium/build/lib/main.js";
+//             String appiumJSPath = "/usr/local/lib/node_modules/appium/build/lib/main.js";
 
         builder = new AppiumServiceBuilder()
                 .withAppiumJS(new File(appiumJSPath))
        //         .usingDriverExecutable(new File(Appium_Node_Path))
                 .withIPAddress("0.0.0.0")
-             //   .usingAnyFreePort()
+                .usingAnyFreePort()
         //        .withLogFile(new File("src/test/java/extentreports/appium.txt"))
                 .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
                 .withArgument(GeneralServerFlag.LOG_LEVEL, "error");

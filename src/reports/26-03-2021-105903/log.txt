@@ -1,0 +1,19 @@
+
+Copyright © 2021 Xunison Ltd All Rights Reserved.
+ =============================================
+
+[10:59:22]: [Driver on Realme] setup is completed!
+[10:59:22]: [APP] stcDebug is running...
+[10:59:33]: Menu button is clickable
+[10:59:34]: Parental control button is clicked
+[10:59:49]: Pie chart display
+[10:59:52]: Logged in to WhatsApp---26/03/2021 10:43
+[10:59:52]: Logged in to Facebook---26/03/2021 10:39
+[10:59:52]: Logged in to Facebook---26/03/2021 10:27
+[10:59:52]: Logged in to Facebook---26/03/2021 09:59
+[10:59:52]: Logged in to Facebook---26/03/2021 09:42
+[10:59:52]: Logged in to Facebook---26/03/2021 09:42
+[10:59:53]: Device list display
+[10:59:54]: 2686b952-aabe-4a68-80f2-76ffdb7ac2aa: Saving device log...
+[10:59:54]: 2686b952-aabe-4a68-80f2-76ffdb7ac2aa: Saving device log - Done.
+[10:59:54]: [APP] stcDebug has been stopped

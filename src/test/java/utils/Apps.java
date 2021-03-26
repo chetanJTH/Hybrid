@@ -4,7 +4,7 @@ public enum Apps {
 
     ApiDemo("", "", "src/app/ApiDemos-debug.apk"),
     stcDe("xunison.com.smarthomeapp", "xunison.com.smarthomeapp.screen.smarthome.MainActivity", "src/app/stc.apk"),
-    stcDebug("xunison.com.smarthomeapp", "xunison.com.smarthomeapp.screen.smarthome.MainActivity", "src/app/stc.apk");
+    stcDebug("xunison.com.smarthomeapp", "xunison.com.smarthomeapp.screen.smarthome.MainActivity", "src/app/app-stc-debug.apk");
 
 
     private String appPackage;

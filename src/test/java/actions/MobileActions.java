@@ -9,6 +9,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,9 +17,11 @@ import org.testng.Assert;
 import utils.Log;
 import utils.Utils;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -31,6 +34,7 @@ import java.util.logging.Level;
 public class MobileActions {
 
     private static AndroidDriver driver;
+    private static WebDriver driver1;
     private static String screenshotPath;
     private TouchAction _touchAction;
     private static boolean isScreenShot_ = false;
@@ -121,7 +125,7 @@ public class MobileActions {
 
         try {
             Point point = new Point(element.getCenter().getX(), element.getCenter().getY());
-       //     System.out.println("[TAP] at" + point);
+            //     System.out.println("[TAP] at" + point);
             PointOption pointOption = new PointOption().withCoordinates(point);
             touchAction().tap(pointOption).perform();
 
@@ -145,27 +149,26 @@ public class MobileActions {
         }
     }
 
-    public boolean isSelected (AndroidElement element) {
+    public boolean isSelected(AndroidElement element) {
         if (element.isSelected()) {
             Log.addLog("Time range is selected");
             return true;
-        }else {
+        } else {
             Log.addLog("Time range is not selected");
             return false;
         }
     }
 
-    public void Status (AndroidElement element) {
-       String ExpectText = "ON";
-       String ActText = element.getText();
-       if (ExpectText.equals(ActText)){
-           Assert.assertEquals(ExpectText,ActText);
-           Log.addLog("Automation is on");
-        }else {
+    public void Status(AndroidElement element) {
+        String ExpectText = "ON";
+        String ActText = element.getText();
+        if (ExpectText.equals(ActText)) {
+            Assert.assertEquals(ExpectText, ActText);
+            Log.addLog("Automation is on");
+        } else {
             Log.addLog("Automation is off");
         }
     }
-
 
 
     public boolean colorSeekBarForward(AndroidElement seekBar, int perc) {
@@ -223,16 +226,16 @@ public class MobileActions {
     public boolean shadowSeekBarBack(AndroidElement seekBar, int perc) {
         if (seekBar != null) {
             int widthOfSeekBar = seekBar.getSize().getWidth();
-            Log.addLog("widthOfSeekBar " + widthOfSeekBar);
+            //    Log.addLog("widthOfSeekBar " + widthOfSeekBar);
 
             int startX = seekBar.getLocation().getX();
-            Log.addLog("startX " + startX);
+            //    Log.addLog("startX " + startX);
             int midY = seekBar.getLocation().getY();
 
             int endX = startX + seekBar.getSize().getWidth();
-            Log.addLog("endX " + endX);
+            //    Log.addLog("endX " + endX);
             int moveTo = (int) (endX - (widthOfSeekBar * (float) perc / 100));
-            Log.addLog("moveTo " + moveTo);
+            //    Log.addLog("moveTo " + moveTo);
 
             TouchAction action = new TouchAction(driver);
             action.longPress(PointOption.point(endX - 5, midY)).moveTo(PointOption.point(moveTo, midY)).release().perform();
@@ -325,7 +328,7 @@ public class MobileActions {
 
 
         while (!isDisplayed(text)) {
-            swipeElementByPercentage(parent, Direction.LEFT);
+            swipeElementByPercentage(parent, Direction.BOTTOM);
         }
 
         driver.findElementByXPath("//androidx.appcompat.app.ActionBar.Tab[@content-desc=\"" + text + "\"]").click();
@@ -340,7 +343,6 @@ public class MobileActions {
             return false;
         }
     }
-
 
 
     /**
@@ -429,6 +431,15 @@ public class MobileActions {
         return (AndroidElement) driver.findElementById(id);
     }
 
+
+    public void ScrollOnScreen(Point fromPoint, Point toPoint) {
+
+        WaitOptions waitOptions = new WaitOptions().withDuration(Duration.ofMillis(3000));
+
+        touchAction().press(new PointOption().withCoordinates(fromPoint)).waitAction(waitOptions).moveTo(new PointOption().withCoordinates(toPoint)).release().perform();
+
+    }
+
     private boolean isFoundElement(String id) {
 
         try {
@@ -464,23 +475,21 @@ public class MobileActions {
 //
 //        return image.getAbsolutePath();
 //    }
+    public static void setScreenShot(boolean isScreenShot) {
 
-
-    public static void setScreenShot(boolean isScreenShot){
-
-        if(isScreenShot){
+        if (isScreenShot) {
             isScreenShot_ = true;
-        }else {
-            isScreenShot_= false;
+        } else {
+            isScreenShot_ = false;
         }
 
     }
 
-    public static boolean isScreenShot(){
+    public static boolean isScreenShot() {
         return isScreenShot_;
     }
 
-    public static String Screenshot(String imageName)  {
+    public static String Screenshot(String imageName) {
 
         try {
             File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -499,18 +508,19 @@ public class MobileActions {
 
         if (seekBar != null) {
             int widthOfSeekBar = seekBar.getSize().getWidth();
-       //     Log.addLog("widthOfSeekBar " + widthOfSeekBar);
+            //     Log.addLog("widthOfSeekBar " + widthOfSeekBar);
 
             int startX = seekBar.getLocation().getX();
-       //     Log.addLog("startX " + startX);
+            //     Log.addLog("startX " + startX);
             int midY = seekBar.getLocation().getY();
-       //     Log.addLog("midY " + midY);
+            //     Log.addLog("midY " + midY);
             int endX = startX + seekBar.getSize().getWidth();
-       //     Log.addLog("endX " + endX);
+            //     Log.addLog("endX " + endX);
             int moveTo = (int) ((endX * (float) perc / 100));
-       //     Log.addLog("moveTo " + moveTo);
+            //     Log.addLog("moveTo " + moveTo);
             TouchAction action = new TouchAction(driver);
-            action.longPress(PointOption.point(startX, midY)).moveTo(PointOption.point(moveTo, midY)).release().perform();
+            action.longPress(PointOption.point(startX + 5
+                    , midY)).moveTo(PointOption.point(moveTo, midY)).release().perform();
             //  action.longPress(LongPressOptions.longPressOptions().withPosition(PointOption.point(startX,midY))).moveTo(PointOption.point(moveTo,midY)).perform().release();
             return true;
         } else {
@@ -522,16 +532,16 @@ public class MobileActions {
 
         if (seekBar != null) {
             int widthOfSeekBar = seekBar.getSize().getWidth();
-       //     Log.addLog("widthOfSeekBar " + widthOfSeekBar);
+            //     Log.addLog("widthOfSeekBar " + widthOfSeekBar);
 
             int startX = seekBar.getLocation().getX();
-       //     Log.addLog("startX " + startX);
+            //     Log.addLog("startX " + startX);
             int midY = seekBar.getLocation().getY();
 
             int endX = startX + seekBar.getSize().getWidth();
-        //    Log.addLog("endX " + endX);
+            //    Log.addLog("endX " + endX);
             int moveTo = (int) (endX - (widthOfSeekBar * (float) perc / 100));
-       //     Log.addLog("moveTo " + moveTo);
+            //     Log.addLog("moveTo " + moveTo);
 
             TouchAction action = new TouchAction(driver);
             action.longPress(PointOption.point(endX - 5, midY)).moveTo(PointOption.point(moveTo, midY)).release().perform();
@@ -547,12 +557,18 @@ public class MobileActions {
         DateFormat df = new SimpleDateFormat("dd_MM_yyyy_HH-mm-ss");
         Date today = Calendar.getInstance().getTime();
         String reportDate = df.format(today);
-        String logPath = Utils.createDir((Utils.getReportDir() + "adbLogs"));
+        String logPath = Utils.createDir((Utils.getReportDir() + "/adbLogs"));
         Log.addLog(driver.getSessionId() + ": Saving device log...");
-        List<LogEntry> logEntries = driver.manage().logs().get("logcat").filter(Level.ALL);
+        List<LogEntry> logEntries = driver.manage().logs().get("logcat").getAll();
         File logFile = new File(logPath, testName + ".txt");
         PrintWriter log_file_writer = new PrintWriter(logFile);
-        log_file_writer.println(logEntries );
+
+        for (LogEntry logEntry : logEntries) {
+         //   log_file_writer.println("\n==============================\n");
+            log_file_writer.println(logEntry.getLevel() + " : " + logEntry.getMessage().toString()+"\n");
+        }
+        log_file_writer.println("==============================");
+        log_file_writer.println(logEntries);
         log_file_writer.flush();
         Log.addLog(driver.getSessionId() + ": Saving device log - Done.");
     }
@@ -567,8 +583,6 @@ public class MobileActions {
 //
 //
 //    }
-
-
 
 
 }

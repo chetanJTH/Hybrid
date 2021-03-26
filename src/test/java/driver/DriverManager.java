@@ -7,11 +7,13 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
+import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import utils.Apps;
 import utils.Devices;
 import utils.Log;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class DriverManager {
@@ -36,7 +38,7 @@ public class DriverManager {
         AndroidDriver driver = new AndroidDriver<MobileElement>(appiumServer.startServer().getUrl(), capabilities);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-//        List<LogEntry> logEntries = driver.manage().logs().get("logcat").getAll();
+
 
 
         Log.addLog("[Driver on " + device.name() +"] setup is completed!");
